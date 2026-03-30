@@ -1,0 +1,496 @@
+Software Design mit Modernem C++
+---------------------------------
+
+Inhalt:
+-------
+
+ToDo-Liste: Ist On the fly zu erweitern / ändern
+
+Java ist vorhanden
+
+Embedded Programming
+
+Java vs. C++
+
+=====================================================
+
+Value-based // Reference-based: Jepp
+
+Wo liegen in C++ Daten? -> Heap, Stack, Static Storage: Jepp
+
+Referenzen: Jepp
+
+Interfaces: Jepp
+
+Vererbung vs. Komposition: Jepp
+
+Polymorphismus in C++: Jepp
+
+
+==> auto     Lesbarkeit : Jepp
+
+==> Bibliotken: STL, Iteratoren, Algorithmen : Jepp
+
+    Hash-Map: Schlüssel ist in den Werten vorhanden (interne Id) -: Jepp
+              kann man die rausziehen als Key ... 
+
+
+    Problem:   Ein Objekt hat intern Daten eines anderen Typs.
+               Will darüber itieren ...
+
+==> Strukturierung mit Header-Dateien: Jepp
+
+
+==> Const Correctness: Jepp
+
+==> Dynamischer Polymorphismus  vs. Statischer Polymorphismus 
+
+Templates (Generics) 
+
+
+ToDo: Initialisierung // Initializer Lists
+
+Objekte // Resources des unterlagerten OS 
+
+Die new / delete Probleme (delete vergessen, ...): Smart Pointer: std::shared_ptr, ...  
+
+=====================================================
+
+Ranges
+
+Generische Funktionen
+
+Concepts
+
+Modul Konzept - anschauen
+
+Lambdas 
+
+==> Objekt-Modell: Java vs. C++
+
+==> Performanz:  Verschieben
+
+==> RAII (Mutex, SOCKET, FILE Handle, ...)
+
+Statischer Polymorphismus
+
+std::variant // Type Traits
+
+std::weak_ptr
+
+Design Patterns // SOLID: Single Responsibility, Dependency Inversion
+
+=====================================================
+
+
+Value-based // Reference-based
+
+Was ist das ???????
+
+Java:
+-----
+
+==> Hat nur REFERENZ-SEMANTIK!
+
+    KEIN Problem:     bei "a = b;"  habe ich ZWEI Referenzen,
+                      die auf dasselbe Objekt zeigen !!!
+
+                      a = b.Clone();   // Da muss ich sogar etwas tun,
+                                       // um eine Kopie zu erhalten
+
+
+class Person { ... }
+
+void func()
+{
+   Person p;                    // p: REFERENZ  // Adresse (Pointer): 8 Bytes
+   p = new Person(...);         // Daten: Heap
+
+   // Garbage Collector (GC)
+}
+
+
+C++:
+-----
+
+==> Hat WERTE-SEMANTIK!     Value-Based
+
+    Problem:     bei "a = b;"  entsteht eine KOPIE
+
+
+==> Hat REFERENZ-SEMANTIK!  Reference-Based  // 2 Ausprägungen
+
+                                     // mit Adressen / Zeigern:
+                                        Konzeptionell: Für Objekte auf dem HEAP (new)
+
+                                     // mit Referenzen
+                                        Konzeptionell: Für Objekte auf dem STACK,
+                                        um überflüssige KOPIEN zu vermeiden.
+
+                                    // Auch: Bei der Parameterübergabe
+                                    // auch hier will ich (meistens) Kopien vermeiden
+
+
+
+Worin unterscheiden C++ - und Java Referenzen
+sich fundamental:
+
+C++ Referenzen zeigen IMMER auf DASSELBE Objekt !!!
+
+
+
+
+
+
+
+
+class Person { ... }
+
+void func()
+{
+    Person p;                // Das ist EIN OBJEKT
+}
+
+void func()
+{
+    //  Reference-Based  // 1 Ausprägung: Mit Zeiger
+    //  Diese ist SEHR ÄHNLICH zu Java
+
+    Person* p;               // Das ist EIN Zeiger / Pointer
+    p = new Person(...);     // Daten: Heap
+
+    // NO Garbage Collector (GC)
+    delete p;
+}
+
+Wann verwende ich was ???
+
+= Pointer: Wenn ich Objekte dynamisch allokieren möchte.
+
+  Zur Übersetzungszeit ist NICHT bekannt, wieviele Objekte 
+  eines bestimmten Typs benötigt werden.
+
+  ==> Mit new UND delete  // Besser: Mit Smart Pointern.
+
+= Referenzen:
+
+  ==> Meistens (fast immer) bei der Parameterübergabe
+
+  ==> Wenn ich Objekte GLOBAL oder am STACK habe ...
+    und diese woandern (in unterlagerten Methoden) ansprechen möchte
+    und KEINE Kopien haben möchte ...
+
+Wann verwende ich was im Klassendesign:
+
+===================================================
+
+Wo liegen Werte von std::string // STL Container:
+
+Eine Hülle mit den Verwaltungs-Daten am Stack:  Länge, Adressen, die sich auf den Heap beziehen
+Die tatsächlichen Daten: Am Heap
+
+
+
+== Werte von Klassen mit Beziehungen:
+
+Wie programmiere ich unterlagerte Objekte // anderen Objekte,
+auf die ich mit beziehe, in C++ ????
+
+a) Mit STL Containern:   std::vector, std::list, .........
+
+   std::vector <Data*>                      // muss die deletes verwalten
+   std::vector < std::shared_ptr <Data> >   // die std::shared_ptr geben frei
+
+   std::vector < std::ref<Data> >           // Ginge, eher selten
+
+   
+
+In Java habe ich ArrayList <Data>
+
+Ist in vielerlei Hinsicht einfacher:
+
+a) Wer gibt die Data's frei: GC
+b) Habe alles am HEAP
+
+
+
+
+b) eine einzelne Beziehung
+
+
+std::shared_ptr <Data>
+
+===================================================
+
+STL Container: Default:  HAT WERTE !!!!!!!!
+
+i) Ginge Pointer // besser: GINGE Smart Pointer
+
+Beziehung: Über (Smart) Pointer
+
+ii) Ginge auch Referenz: Ist im Handlung etwas sperrig.
+
+
+
+===================================================
+
+Was hat es mit const auf sich ??????????????????
+
+a) const std::string& getFirstName() { return firstName; }
+
+   Gut, kann das Original im Person Objekt nicht verändern !!!
+
+b) 2 Aspekt:
+
+Warum wird die OOP immer wieder kritisiert ??????????
+
+==> Funktionale Programmierung ge-hyped :)
+
+    Sehr tief parallisieren // Pipelining....
+
+======================================================
+
+ReCap:
+
+C++ im Vergleich zu Java:
+
+Ein Ansatz:
+
+Man kann in C++ sehr wohl ähnlich zu Java entwickeln:
+
+==> Viele Daten werden dann mit new (Smart Pointer) angelegt.
+    Vorteil Smart Pointer: Man muss sich um das delete nicht kümmern.
+
+C++: Da gibt es eine Besonderheit:
+
+   Objekte liegen als WERT vor : Am Stack // Global.
+
+   Add On.
+
+   Vorsicht: Bei diesen Objekten könn(t)en KOPIEN entstehen:
+
+   Diese vermeidet man mit Referenzen.
+
+======================================================
+
+Klassen mit Beziehungen:
+
+Wie in Java konzipieren:
+
+ArrayList ==> std::vector 
+
+Data     ==> std::shared<Data>
+
+======================================================
+
+Vorsicht:
+
+std::vector <Data>
+
+std::vector < std::shared_ptr <Data> >
+
+
+======================================================
+
+Weiter:
+
+Container mit Referenzen
+
+Container mit Daten (Value)
+
+
+======================================================
+
+Vererbung:
+----------
+
+Interface: Jepp
+
+Abstrakte Klasse:  Jepp
+
+Virtueller Basisklassendestruktor
+
+Polymorphismus:
+
+Ausführung von Methoden, die exakt erst zur Laufzeit bekannt sind.
+
+
+
+======================================================
+
+Header-Dateien:
+
+==> System-Header Files
+
+==> meine eigenen Header-Files
+
+
+// =====================================================================================
+// LoremIpsumImpl.cpp // Copy-on-Write
+// =====================================================================================
+
+#include "LoremIpsum.h"
+
+#include <algorithm>       // std::generate
+#include <cctype>          // std::toupper
+#include <cstddef>         // std::size_t
+#include <fstream>         // std::ofstream
+
+Best-Practice:
+
+Erst die eigenen, dann die vom System.
+
+Warum nicht anders herum ??????????????????
+
+Empfehlung:  Die eigenen Includes sollten "unabhängig" inkludierbar sein.
+
+====================================================================
+
+Wann brauche ich eigene Header-Files ?????????
+
+
+====================================================================
+
+Das berühmte 'inline':
+
+Implementierung sollte im Header sein.
+
+====================================================================
+
+Wann und wo setze ich Vererbung ein ???
+
+Geht es auch anders ???
+
+==> Graphentheorie
+
+Mit Vererbung.
+
+// Von welchem Typ sind die Gewichte: 100 km // int  100.5 km  double
+
+class Graph;
+class DirectedGraph;
+class UndirectedGraph;
+class WeightedGraph;
+class UnweightedGraph;
+
+Das wurde mit Vererbung SEHR komplex.
+
+Ideen:
+
+class Graph : Interface
+
+class DirectedGraph : public Graph
+class UndirectedGraph : public Graph
+
+Alternative:
+
+a) Interface Graph
+
+   bool isDirected();
+   bool isWeighted();
+
+==> Kompositum // Containment
+
+==============================================
+
+Überarbeitung:
+
+class FloydAlgorithm   // kürzester Weg
+{
+};
+
+==============================================
+
+STL
+
+C++:                       Bjarne Stroustrup   // C with Classes
+Generische Programmierung: Alexander Stepanov
+
+Bibliothek: STL
+
+Transparenz von Containern:  Leichte Austauschbarkeit
+
+Container sollten eine "Ähnlichkeit" aufweisen.
+
+interface: // Vererbung
+
+STL:  KEINE Vererbung
+
+Die STL implementiert AUSSCHLIEßLICH Methoden, Klassen,
+die bzfl. der O-Notation (Performanz) im grünen Bereich ist / sind.
+
+STL Container
+
+STL Iteratoren
+
+STL Algorithmen
+
+Sie operieren NICHT DIREKT auf dem Container,
+sondern operieren auf Positionen (Iteratoren).
+
+================================================
+
+Wie machen es andere Sprachen
+
+Mit einem Interface Iterable // Methoden
+
+next     Element
+hasNext  Weiter in der Iteration
+
+Wie machen es C++: Mit Operatoren
+
+++     Gehe zum Nächsten
+*      Wert an der Stelle
+==, != Vergleich 
+
+Was ist ein Iterator in C++  : Eine Position in einem Container
+
+Von welchem Typ ist ein Iterator: Hängt vom Container ab.
+
+Wie komme ich zu einer Postion:  Durch Methoden an einem (ALLEN) Container:
+
+begin()
+end()
+
+=======================
+
+OHNE Referenz
+	int n = elem;
+00007FF64489B95F  mov         eax,dword ptr [elem]  
+00007FF64489B965  mov         dword ptr [n],eax  
+
+
+MIT Referenz // INDIREKT
+	int n = elem;
+00007FF6BD8EB960  mov         rax,qword ptr [elem]  
+00007FF6BD8EB967  mov         eax,dword ptr [rax]  
+00007FF6BD8EB969  mov         dword ptr [n],eax  
+
+================================================
+
+auto:
+
+Automatische Typableitung  // automatic type deduction
+
+ACHTUNG:
+
+Verlust von const und & bei auto !!!!!!!!!!!!!!!!!!
+
+Frage:
+
+Do we go for auto or not ?????????????
+
+Yes .. we do:  Readability !!!
+
+Wir sollten aber IMMER wissen, welcher Typ verbirgt sich dahinter !!!
+
+Keinen Blindflug !!!
+
+================================================
+
+
+
+
+
+
+

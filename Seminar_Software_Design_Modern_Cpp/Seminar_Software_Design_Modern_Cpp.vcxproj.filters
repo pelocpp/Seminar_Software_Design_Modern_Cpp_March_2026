@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Notizettel.txt">
+    <Text Include="..\Notizzettel.txt">
       <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
@@ -28,14 +28,28 @@
     <ClCompile Include="Program.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Topic_01_XXX.cpp">
+    <ClCompile Include="Topic_01_Pointer_vs_References.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Topic_01_YYY.cpp">
+    <ClCompile Include="Topic_02_Inheritance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Topic_01_ZZZ.cpp">
+    <ClCompile Include="Topic_03_STL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="AbstractClass.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_04_UserImplementedIteration.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_05_auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Interfaces.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

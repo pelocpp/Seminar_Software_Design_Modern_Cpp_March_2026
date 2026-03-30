@@ -6,6 +6,13 @@ Trainer: Peter Loos
 
 Zum Notizzettel geht es [hier](Notizzettel.txt).
 
+
+## Unterlagen:
+
+https://github.com/pelocpp
+
+
+
 ## Inhalt:
 
 ### Ziele

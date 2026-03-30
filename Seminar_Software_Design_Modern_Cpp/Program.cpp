@@ -2,11 +2,17 @@
 // Program.cpp
 // =====================================================================================
 
+void test_references();
+void test_poly();
+void test_stl();
+void test_user_defined_iteration();
+void test_auto();
+
 #include <iostream>
 
 int main()
 {
-    std::cout << "Hello Seminar" << std::endl;
+    test_auto();
 
     return 1;
 
