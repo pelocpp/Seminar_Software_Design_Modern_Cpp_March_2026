@@ -141,6 +141,13 @@
   <ItemGroup>
     <ClInclude Include="Interfaces.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Cpp.png" />
+    <Image Include="Java.png" />
+    <Image Include="Object_With_Heap_Data.png" />
+    <Image Include="Vector_Copy.png" />
+    <Image Include="Vector_Dynamisch.png" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

@@ -52,4 +52,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Cpp.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Java.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Object_With_Heap_Data.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Vector_Copy.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="Vector_Dynamisch.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
