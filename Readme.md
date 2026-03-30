@@ -9,7 +9,7 @@ Zum Notizzettel geht es [hier](Notizzettel.txt).
 ## Inhalt:
 
 ### Ziele
-In dieser 3-tägigen Schulung "Software Design mit Modernem C++" lernen Sie die Prinzipien
+In dieser 2-tägigen Schulung "Software Design mit Modernem C++" lernen Sie die Prinzipien
 des guten Software-Designs mit der C++ Programmiersprache.
 Der Kurs konzentriert sich auf bewährte Software-Entwicklungskonzepte und -prinzipien spezifisch für C++.
 Sie werden lernen, wie Sie professionellen und hochwertigen Code schreiben können,
