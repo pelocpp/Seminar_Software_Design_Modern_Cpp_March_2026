@@ -56,15 +56,18 @@ Die new / delete Probleme (delete vergessen, ...): Smart Pointer: std::shared_pt
 
 =====================================================
 
+Lambdas : Jepp
+
+Generische Funktionen: Jepp
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/GenericFunctions/GenericFunctions.md
+
+Concepts: Jepp
+
 Ranges
-
-Generische Funktionen
-
-Concepts
 
 Modul Konzept - anschauen
 
-Lambdas 
 
 ==> Objekt-Modell: Java vs. C++
 
@@ -488,9 +491,124 @@ Keinen Blindflug !!!
 
 ================================================
 
+Callable
+
+C++:  Aufrufbares Objekt
+
+Cpp Insights: !!!!!!!!!!!!
+
+https://cppinsights.io/
+
+=========================================================
+
+auto:
+
+A) Als Variablenvereinbarung
+
+B) Rückgabetyp von Funktionen
+
+C) Als Typ von Parametern (C++ 17 / 20)
+
+=========================================================
+
+Mit auto gibt es eine neue Stilistik
+in der Vereinbarung von Variablen:
+
+https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Clean_Code_Guidelines/Clean_Code_Guidelines_Modern_Cpp.md#link2
+
+Schlüsselwort auto: Left-to-Right Initialisierungsstil
+Verwenden Sie das Schlüsselwort auto, um damit einen einheitlichen, besser lesbaren Initialisierungsstil für Variablen zu haben:
+
+01: auto var1 = 0;
+02: auto var2 = Foo{};
+03: auto var3 = createFooOject();
+04: auto var4 = std::mutex{};
+05: auto name = std::string{ "Hans" };
+06: auto anotherName = std::make_unique<Foo>(123);
+07: auto myLambda = [](auto n, auto m) { return n + m; };
+
+
+Foo var2;
+
+Foo var2();  // NEIN !!!!!!!!!!!!
+
+Foo var2{};  // Yes
+
+
+================================================================
+
+Concepts
+
+https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/ConceptsRequiresFunctions/ConceptsRequiresFunctions.md
+
+
+=================================================================
+
+Was bedeutet T&&
+
+bei zB
+
+template <typename T>
+void indirekter_aufruf_04(T&& func, int argument)
+{
+	func(argument);
+}
+
+Wann nehmen wir std::function ???
+
+Wenn wir aufrufbare Objekte (Lambdas, Methoden an Objekten, Objekte mit operator(),...)
+zwischenspeichern wollen.
+
+Wir werden Parameter in solchen Fällen EFFIZIENT
+weitergeleitet, um unnütze Kopien der Parameter zu vermeiden:
+
+1. Beispiel:
+
+Siehe 
+
+https://github.com/pelocpp/cpp_concurrency/blob/master/Programs/33_EventLoop/EventLoop.h
+
+
+    std::vector<std::function<void()>>  m_events;
+
+    // oder
+
+    std::vector<std::move_only_function<void()>>  m_events;
+
+    template<typename TFunc, typename ... TArgs>
+    void enqueueTask(TFunc&& func, TArgs&& ...args)
+    {
+
+        // using "Generalized Lambda Capture" to preserve move semantics
+        auto callable {
+            [func = std::forward<TFunc>(func),
+            ... capturedArgs = std::forward<TArgs>(args)] () {
+                std::invoke(std::move(func), std::move(capturedArgs) ...);
+            } 
+        };
+
+        {
+            // RAII guard
+            std::lock_guard<std::mutex> guard{ m_mutex };
+            m_events.push_back(std::move(callable));
+        }
+
+        m_condition.notify_one();
+    }
 
 
 
+    Hinweis:
 
+    A) C++ 14:
 
+        // How about by-move capture?
+        // Instead of adding it, C++14 introduced the "Generalized Lambda Capture",
+        // also known as "Init Capture":
+
+    Siehe auch die Datei "Topic_07_Lambdas.cpp"
+
+    B) C++20: „Variadic Capture”
+
+    https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/Folding/Folding.md#link5
 

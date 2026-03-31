@@ -6,10 +6,11 @@
 #include <deque>
 #include <map>
 #include <unordered_map>
+#include <print>
 
 static void test_stl_01()
 {
-    std::vector<int> numbers;
+	std::vector<int> numbers;
 	//std::list<int> numbers;
 
 	numbers.push_back(1);
@@ -83,12 +84,26 @@ static void test_stl_02()
 
 
 
-static void printElem(int& elem)
-{
-	int n = elem;
+//static void printElem(int& elem)
+//{
+//	int n = elem;
+//
+//	std::cout << elem << std::endl;
+//}
 
-	std::cout << elem << std::endl;
-}
+class Printer
+{
+private:
+	std::string m_header;
+
+public:
+	Printer() : m_header{ ">>> "} {}
+	Printer(const std::string& header) : m_header{ header } {}
+
+	void operator () (int elem) const {
+		std::cout << elem << std::endl;
+	}
+};
 
 static void test_stl_03()
 {
@@ -101,11 +116,64 @@ static void test_stl_03()
 
 	// Nomenklatur:  numbers.begin() bis hin zu numbers.end() bezeichnet man als Bereich // Range
 
+	Printer printer;
+
 	std::for_each(
 		numbers.begin(),
 		numbers.end(),
-		printElem
+		printer
 	);
+
+	auto myLambda = [](int elem) {
+		std::cout << elem << std::endl;
+		};
+
+	std::for_each(
+		numbers.begin(),
+		numbers.end(),
+		[] (auto elem) {
+		    std::cout << elem << std::endl;
+	    }
+	);
+
+	std::for_each(
+		numbers.begin(),
+		numbers.end(),
+		[](/*const*/ int& elem) {
+			// std::cout << elem << std::endl;
+			elem = elem * 2;
+		}
+	);
+
+	for (auto elem : numbers) {
+		std::cout << elem << std::endl;
+		if (elem == 2) {
+			break;
+		}
+	}
+
+	std::println();
+
+	int multiplikator = 3;
+
+	std::for_each(
+		numbers.begin(),
+		numbers.end(),
+		[=] (int& elem) {
+			elem = elem * multiplikator;
+		}
+	);
+
+	std::for_each(
+		numbers.begin(),
+		numbers.end(),
+		[](int elem) {
+			std::cout << elem << std::endl;
+		}
+	);
+
+	std::println();
+
 }
 
 static void test_stl_04()
@@ -119,7 +187,7 @@ static void test_stl_04()
 
 	// Nomenklatur:  numbers.begin() bis hin zu numbers.end() bezeichnet man als Bereich // Range
 	// Range-based For-Loop
-	for ( const int& elem :  numbers) {
+	for (const int& elem : numbers) {
 
 		//++elem;
 		std::cout << elem << std::endl;
@@ -147,7 +215,9 @@ static void test_stl_05()
 	std::for_each(
 		numbers.begin(),
 		numbers.end(),
-		printElem
+		[](int elem) {
+			std::cout << elem << std::endl;
+		}
 	);
 
 	// Alle Elemente in dem Container mit 2 multiplizieren 
@@ -215,17 +285,17 @@ static void test_03() {
 
 	std::string hans("Hans");
 
-	std::unordered_map<int, std::string> anotherMap{ { hans.size(), hans }};
+	std::unordered_map<std::size_t, std::string> anotherMap{ { hans.size(), hans } };
 
-	std::unordered_map<int, std::string>::iterator it = anotherMap.begin();
+	std::unordered_map<std::size_t, std::string>::iterator it = anotherMap.begin();
 
-    std::pair<int, std::string> entry1 = *it;  // Why this line DOES NOT compile ???
+	std::pair<std::size_t, std::string> entry1 = *it;  // Why this line DOES NOT compile ???
 
 	auto& entry2 = *it;
 }
 
 
-void test_stl()
+void test_stl_lambdas()
 {
-	test_stl_05();
+	test_stl_03();
 }

@@ -125,6 +125,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="..\Readme.md" />
+    <None Include="Ranges.md" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Notizzettel.txt" />
@@ -137,6 +138,13 @@
     <ClCompile Include="Topic_03_STL.cpp" />
     <ClCompile Include="Topic_04_UserImplementedIteration.cpp" />
     <ClCompile Include="Topic_05_auto.cpp" />
+    <ClCompile Include="Topic_06_Ranges.cpp" />
+    <ClCompile Include="Topic_07_Lambdas.cpp" />
+    <ClCompile Include="Topic_08_STL_Lambdas.cpp" />
+    <ClCompile Include="Topic_09_Generic_Functions.cpp" />
+    <ClCompile Include="Topic_10_Concepts.cpp" />
+    <ClCompile Include="Topic_11_Frage_Lambda_als_Parameter.cpp" />
+    <ClCompile Include="Topic_12_Perfect_Forwarding.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interfaces.h" />

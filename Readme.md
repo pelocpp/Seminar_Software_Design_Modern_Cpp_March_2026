@@ -6,6 +6,9 @@ Trainer: Peter Loos
 
 Zum Notizzettel geht es [hier](Notizzettel.txt).
 
+Zu Ranges [hier](Ranges.md).
+
+
 
 ## Unterlagen:
 

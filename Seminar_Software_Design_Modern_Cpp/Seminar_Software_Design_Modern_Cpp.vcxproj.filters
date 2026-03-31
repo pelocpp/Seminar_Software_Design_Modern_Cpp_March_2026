@@ -23,6 +23,9 @@
     <None Include="..\Readme.md">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Ranges.md">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Program.cpp">
@@ -44,6 +47,27 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Topic_05_auto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_06_Ranges.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_07_Lambdas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_08_STL_Lambdas.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_09_Generic_Functions.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_10_Concepts.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_11_Frage_Lambda_als_Parameter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Topic_12_Perfect_Forwarding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
