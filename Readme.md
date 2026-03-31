@@ -4,6 +4,8 @@ Guten Morgen :)
 
 Trainer: Peter Loos
 
+peter.loos@gmx.de
+
 Zum Notizzettel geht es [hier](Notizzettel.txt).
 
 Zu Ranges [hier](Seminar_Software_Design_Modern_Cpp/Ranges.md).

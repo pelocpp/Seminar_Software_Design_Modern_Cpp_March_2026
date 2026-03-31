@@ -66,16 +66,15 @@ Concepts: Jepp
 
 Ranges: Jepp
 
-Modul Konzept - anschauen          !!!!!!!!!!!!!!!!
-
+Modul Konzept - anschauen 
 
 ==> Objekt-Modell: Java vs. C++
 
 ==> Performanz:  Verschieben
 
-==> RAII (Mutex, SOCKET, FILE Handle, ...)   !!!!!!!!!!!
+==> RAII (Mutex, SOCKET, FILE Handle, ...) 
 
-Statischer Polymorphismus  !!!!!!!!!!!!!!!!!!!!!!
+Statischer Polymorphismus 
 
 std::variant // Type Traits
 
@@ -635,6 +634,60 @@ https://github.com/pelocpp/cpp_concurrency/blob/master/Programs/33_EventLoop/Eve
     Eine Weiterführung des Konzepts der Iteratoren (Position).
 
     ==================================================================
+
+    Polymorphismus:
+
+    Siehe auch
+
+    https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/TypeErasure/TypeErasure.md
+
+    Type Erasure: Man verliert Typ Informationen:
+
+    std::function, std::variant, std::any
+
+
+
+
+    Traversieren von Containern / Datenmengen mit unterschiedlichen Objekten
+    ------------------------------------------------------------------------
+
+    a) Klassische Variante : Interface, Vererbung, virtual ....
+
+
+       Nicht immer habe ich die Klassen "in der Hand" // std::string // ext. Bibliothek
+
+    b) OHNE Vererbung, STL Container, std::variant, generische Funktionen
+
+    Beispiel: Ein Vergleich
+
+    Buchhandlung
+
+    Book, CD , Blue Ray, Zeitschrift, ...
+
+=========================================================================
+
+Modul - Konzept: C++ 17 / 20 and beyond
+=======================================
+
+
+==========================================================
+
+Was ist RAII ???
+
+Socket:              open, close
+FILE:                open, close  
+SqlConnection:       connect, disconnect
+
+new / delete:   Was ist, wenn der 2. Aufruf fehlt ...
+
+Idee:  Man platziere das Handle der Resource in einem HÜLLENOBJEKT (Wrapper)
+
+== Konstruktor
+== Destruktor    disconnect, close
+
+===========================================================
+
+std::weak_ptr
 
 
 

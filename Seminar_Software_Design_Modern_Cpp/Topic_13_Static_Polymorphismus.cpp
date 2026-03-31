@@ -9,18 +9,13 @@
 #include <variant>
 #include <print>
 
-namespace {
-    //std::size_t MaxIterations = 1000000;
-    //std::size_t MaxIterations = 100000;
-}
-
 // =====================================================================================
 
 namespace BookStoreUsingDynamicPolymorphism {
 
     struct IMedia
     {
-        virtual ~IMedia() = default;
+        virtual ~IMedia() {};
 
         virtual double getPrice() const = 0;
         virtual std::size_t getCount() const = 0;
@@ -77,6 +72,7 @@ namespace BookStoreUsingDynamicPolymorphism {
     class Bookstore
     {
     private:
+        // IMedia*
         using Stock = std::vector<std::shared_ptr<IMedia>>;
         using StockList = std::initializer_list<std::shared_ptr<IMedia>>;
 
@@ -176,6 +172,7 @@ namespace BookStoreUsingTypeErasure {
         const std::string& getAuthor() const { return m_author; }
         const std::string& getTitle() const { return m_title; }
 
+        // Hmmm, kann man das fixieren ... so wie IMedia ????
         double getPrice() const { return m_price; }
         std::size_t getCount() const { return m_count; }
     };
@@ -199,19 +196,23 @@ namespace BookStoreUsingTypeErasure {
         const std::string& getTitle() const { return m_title; }
         const std::string& getDirector() const { return m_director; }
 
+        // Wie oben
         double getPrice() const { return m_price; }
         std::size_t getCount() const { return m_count; }
     };
 
     template<typename T>
-    concept MediaConcept = requires (const T & m)
+    concept MediaConcept = requires (const T& m)
     {
         { m.getPrice() } -> std::same_as<double>;
         { m.getCount() } -> std::same_as<std::size_t>;
     };
 
     template <typename ... TMedia>
+    
+        // Für eine variadische Anzahl verwenden wir FOLDING
         requires (MediaConcept<TMedia> && ...)
+    
     class Bookstore
     {
     private:
@@ -228,7 +229,7 @@ namespace BookStoreUsingTypeErasure {
         template <typename T>
             requires MediaConcept<T>
         void addMedia(const T& media) {
-            // m_stock.push_back(StockType{ media });  // detailed notation
+            m_stock.push_back(std::variant<TMedia ...>{ media });  // detailed notation
             m_stock.push_back(media);                  // implicit type conversion (T => std::variant<T>)
         }
 
@@ -242,15 +243,15 @@ namespace BookStoreUsingTypeErasure {
 
             double total{};
 
-            for (const auto& media : m_stock) {
+            for (const auto& media : m_stock) {  // media:  std::variant
 
                 double price{};
                 std::size_t count{};
 
                 std::visit(
-                    [&](const auto& element) {
-                        price = element.getPrice();
-                        count = element.getCount();
+                    [&](const auto& element) {       // generic lambda 
+                        price = element.getPrice();  // element: Book,Movie
+                        count = element.getCount();  // ist "immer" schneller
                     },
                     media
                 );
@@ -332,7 +333,7 @@ namespace BookStoreUsingTypeErasure {
         Movie movieTarantino{ "Once upon a time in Hollywood", "Quentin Tarantino", 6.99, 3 };
         Movie movieBond{ "Spectre", "Sam Mendes", 8.99, 6 };
 
-        using MyBookstore = Bookstore<Book, Movie>;
+        using MyBookstore = Bookstore < Book, Movie > ;
 
         MyBookstore bookstore{
             cBook, movieBond, javaBook, cppBook, csharpBook, movieTarantino

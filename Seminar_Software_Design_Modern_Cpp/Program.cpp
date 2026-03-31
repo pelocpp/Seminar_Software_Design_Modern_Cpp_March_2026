@@ -13,10 +13,12 @@ void test_frage_lambda_als_parameter();
 void main_perfect_forwarding();
 void ranges_clean_code_examples();
 void main_static_polymorphismus();
+void main_virtual_base_class_destructor();
+void main_weak_pointer();
 
 int main()
 {
-    main_static_polymorphismus();
+    main_weak_pointer();
     return 1;
 }
 
