@@ -25,8 +25,11 @@ namespace Ranges {
 
         std::vector<int> numbers{ 1, 4, 2, 7, 9, 3, 5 };
 
+        std::vector<int> dummy{ 1, 4, 2, 7, 9, 3, 5 };
+
         std::sort(
             numbers.begin(),
+          //  dummy.end()
             numbers.end()
         );
     }
@@ -125,6 +128,7 @@ namespace Ranges {
             numbers.begin(),
             numbers.end(),
             std::back_inserter(filteringResults),
+          //  filteringResults.begin(),
             [](auto n) {
                 return n % 2 == 0;
             }
@@ -331,6 +335,7 @@ namespace Ranges {
             numbers,
             std::ranges::less{},                  // comparison
             [](auto n) { return std::abs(n); }    // identity
+         //   std::abs
         );
 
         for (auto elem : numbers) {
@@ -473,7 +478,7 @@ namespace Ranges {
             numbers.begin(),
             NegativeNumber{},   // <== sentinel
             numbers.begin(),
-            [](const auto& n) { return n * n; }
+            [](auto n) { return n * n; }
         );
 
         for (auto elem : numbers) {
@@ -532,9 +537,9 @@ namespace Ranges {
     static void ranges_sentinels()
     {
         ranges_sentinels_01();
-        ranges_sentinels_02();
-        ranges_sentinels_03();
-        ranges_sentinels_04();
+        //ranges_sentinels_02();
+        //ranges_sentinels_03();
+        //ranges_sentinels_04();
     }
 
     // =======================================================================
@@ -550,12 +555,16 @@ namespace Ranges {
         auto pos = std::ranges::find(getData(), 123);
 
         // Error: You cannot dereference an operand of type 'std::ranges::dangling'
-        // std::println("{} ", *pos);  
+      //   std::println("{} ", *pos);  
     }
 
     static void ranges_dangling_iterators_02()
     {
-        const auto& values = getData();         // declare const lvalue reference
+        // const auto& values = getData();         // declare const lvalue reference
+        
+        
+        
+        auto values = getData();
 
         auto value{ 3 };
 
@@ -815,8 +824,8 @@ void ranges_clean_code_examples()
     //ranges_eager_evaluation();
     //ranges_bounded_vs_unbounded_range();
     //ranges_lazy_primes();
-    ranges_projections();
-    //ranges_sentinels();
+    //ranges_projections();
+    ranges_sentinels();
     //ranges_dangling_iterators();
     //ranges_keys_view_and_values_view();
     //ranges_common_view();

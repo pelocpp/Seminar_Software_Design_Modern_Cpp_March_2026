@@ -211,20 +211,6 @@ static void test_stl_06()
 	std::cout << elem << std::endl;
 }
 
-static void test_03() {
-
-	std::string hans("Hans");
-
-	std::unordered_map<int, std::string> anotherMap{ { hans.size(), hans }};
-
-	std::unordered_map<int, std::string>::iterator it = anotherMap.begin();
-
-    std::pair<int, std::string> entry1 = *it;  // Why this line DOES NOT compile ???
-
-	auto& entry2 = *it;
-}
-
-
 void test_stl()
 {
 	test_stl_05();

@@ -6,8 +6,7 @@ Trainer: Peter Loos
 
 Zum Notizzettel geht es [hier](Notizzettel.txt).
 
-Zu Ranges [hier](Ranges.md).
-
+Zu Ranges [hier](Seminar_Software_Design_Modern_Cpp/Ranges.md).
 
 
 ## Unterlagen:

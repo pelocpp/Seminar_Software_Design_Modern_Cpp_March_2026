@@ -64,22 +64,22 @@ https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/GenericFunctio
 
 Concepts: Jepp
 
-Ranges
+Ranges: Jepp
 
-Modul Konzept - anschauen
+Modul Konzept - anschauen          !!!!!!!!!!!!!!!!
 
 
 ==> Objekt-Modell: Java vs. C++
 
 ==> Performanz:  Verschieben
 
-==> RAII (Mutex, SOCKET, FILE Handle, ...)
+==> RAII (Mutex, SOCKET, FILE Handle, ...)   !!!!!!!!!!!
 
-Statischer Polymorphismus
+Statischer Polymorphismus  !!!!!!!!!!!!!!!!!!!!!!
 
 std::variant // Type Traits
 
-std::weak_ptr
+std::weak_ptr  
 
 Design Patterns // SOLID: Single Responsibility, Dependency Inversion
 
@@ -611,4 +611,31 @@ https://github.com/pelocpp/cpp_concurrency/blob/master/Programs/33_EventLoop/Eve
     B) C++20: „Variadic Capture”
 
     https://github.com/pelocpp/cpp_modern/blob/master/GeneralSnippets/Folding/Folding.md#link5
+
+    ======================================================
+
+    Ranges:
+
+    Überarbeitung der STL.
+
+    Weniger: Container
+
+    Mehr:  Algorithmen // Iteratoren
+
+    Eric Niebler
+
+    Siehe auch hier:
+
+    https://github.com/pelocpp/cpp_clean_performant_secure/blob/master/Clean_Performant_Code/Clean_Code/Readme_Clean_Code.md
+
+    ========
+
+    Was sind Views (Ansichten)?
+
+    Eine Weiterführung des Konzepts der Iteratoren (Position).
+
+    ==================================================================
+
+
+
 

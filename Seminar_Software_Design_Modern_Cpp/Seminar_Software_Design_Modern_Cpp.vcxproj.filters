@@ -70,6 +70,9 @@
     <ClCompile Include="Topic_12_Perfect_Forwarding.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Topic_13_Static_Polymorphismus.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interfaces.h">

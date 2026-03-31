@@ -145,6 +145,7 @@
     <ClCompile Include="Topic_10_Concepts.cpp" />
     <ClCompile Include="Topic_11_Frage_Lambda_als_Parameter.cpp" />
     <ClCompile Include="Topic_12_Perfect_Forwarding.cpp" />
+    <ClCompile Include="Topic_13_Static_Polymorphismus.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Interfaces.h" />

@@ -11,15 +11,13 @@ void test_stl_lambdas();
 void main_lambdas();
 void test_frage_lambda_als_parameter();
 void main_perfect_forwarding();
-
-#include <iostream>
+void ranges_clean_code_examples();
+void main_static_polymorphismus();
 
 int main()
 {
-    test_frage_lambda_als_parameter();
-
+    main_static_polymorphismus();
     return 1;
-
 }
 
 // =====================================================================================
